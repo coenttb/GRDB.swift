@@ -1,3 +1,5 @@
+> **This is a fork of [groue/GRDB.swift](https://github.com/groue/GRDB.swift)** with one change: under the Swift Package Manager, `GRDBSQLite` is a C target instead of a system library. On Apple platforms it uses the system SQLite as before; elsewhere it compiles the pinned SQLite amalgamation in `Sources/GRDBSQLite/sqlite`, so GRDB builds with Swift's static Linux SDK. It exists for [swift-compositions/swift-sqlite#9](https://github.com/swift-compositions/swift-sqlite/issues/9) and follows upstream's `master`.
+
 <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/groue/GRDB.swift/master/GRDB~dark.png">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/groue/GRDB.swift/master/GRDB.png">

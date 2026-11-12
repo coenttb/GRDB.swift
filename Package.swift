@@ -62,9 +62,29 @@ let package = Package(
     dependencies: dependencies,
     targets: [
         // GRDB+SQLCipher: Delete the GRDBSQLite target
-        .systemLibrary(
+        // The system SQLite on Apple platforms; elsewhere the amalgamation
+        // of SQLite 3.54.1 in Sources/GRDBSQLite/sqlite (sqlite.org,
+        // sqlite-amalgamation-3540100.zip, SHA3-256
+        // 92281c86e2957f9b9305890f9ac04204caa7b677cc868dc326d942689df28e30),
+        // so that GRDB needs no system library and builds with Swift's
+        // static Linux SDK.
+        .target(
             name: "GRDBSQLite",
-            providers: [.apt(["libsqlite3-dev"])]),
+            exclude: ["sqlite/sqlite3.c"],
+            cSettings: [
+                .define("SQLITE_ENABLE_FTS3"),
+                .define("SQLITE_ENABLE_FTS3_PARENTHESIS"),
+                .define("SQLITE_ENABLE_FTS4"),
+                .define("SQLITE_ENABLE_FTS5"),
+                .define("SQLITE_ENABLE_RTREE"),
+                .define("SQLITE_ENABLE_COLUMN_METADATA"),
+                .define("SQLITE_ENABLE_MATH_FUNCTIONS"),
+                .define("SQLITE_OMIT_LOAD_EXTENSION"),
+                .define("HAVE_USLEEP", to: "1"),
+            ],
+            linkerSettings: [
+                .linkedLibrary("sqlite3", .when(platforms: darwinPlatforms)),
+            ]),
         // GRDB+SQLCipher: Uncomment the GRDBSQLCipher target
         //.target(
         //    name: "GRDBSQLCipher",

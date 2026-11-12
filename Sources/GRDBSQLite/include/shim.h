@@ -1,4 +1,8 @@
+#if defined(__APPLE__)
 #include <sqlite3.h>
+#else
+#include "../sqlite/sqlite3.h"
+#endif
 
 typedef void(*_errorLogCallback)(void *pArg, int iErrCode, const char *zMsg);
 
