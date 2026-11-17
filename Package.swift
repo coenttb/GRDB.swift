@@ -35,7 +35,7 @@ if ProcessInfo.processInfo.environment["SQLITE_ENABLE_PREUPDATE_HOOK"] == "1" {
 //
 // SPI_BUILDER also enables the `make docs-localhost` command.
 if ProcessInfo.processInfo.environment["SPI_BUILDER"] == "1" {
-    dependencies.append(.package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"))
+    dependencies.append(.package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.0.0"))
 }
 
 // GRDB+SQLCipher: Uncomment those lines
