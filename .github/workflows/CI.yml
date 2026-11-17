@@ -4,9 +4,8 @@ name: "GRDB CI"
 
 on:
   push:
-    branches: 
-      - master
-      - development
+    branches:
+      - main
     paths:
       - 'GRDB/**'
       - 'Tests/**'
